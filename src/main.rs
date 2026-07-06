@@ -11,7 +11,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_4_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 1);
+        assert_eq!(new_merkle_tree.get_size(), 1);
     }
     #[test]
     fn test_capacity_allocation_2_elements() {
@@ -19,7 +19,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_4_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 3);
+        assert_eq!(new_merkle_tree.get_size(), 3);
     }
     #[test]
     fn test_capacity_allocation_3_elements() {
@@ -27,7 +27,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_4_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 6);
+        assert_eq!(new_merkle_tree.get_size(), 6);
     }
     #[test]
     fn test_capacity_allocation_4_elements() {
@@ -35,7 +35,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_4_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 7);
+        assert_eq!(new_merkle_tree.get_size(), 7);
     }
 
     #[test]
@@ -44,7 +44,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_5_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 11);
+        assert_eq!(new_merkle_tree.get_size(), 11);
     }
 
     #[test]
@@ -53,7 +53,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_6_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 12);
+        assert_eq!(new_merkle_tree.get_size(), 12);
     }
 
     #[test]
@@ -62,7 +62,7 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_7_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 14);
+        assert_eq!(new_merkle_tree.get_size(), 14);
     }
 
     #[test]
@@ -71,6 +71,33 @@ mod test_array_impl {
         let new_merkle_tree = array_implementation::ArrayMT::new(
             arr_8_elements.iter().map(|el| el.to_string()).collect(),
         );
-        assert_eq!(new_merkle_tree.get_capacity(), 15);
+        assert_eq!(new_merkle_tree.get_size(), 15);
+    }
+
+    #[test]
+    fn test_add_one_element_to_merkle_tree() {
+        let arr_6_elements = ["10", "11", "12", "13", "14", "15"];
+        let mut obj = array_implementation::ArrayMT::new(
+            arr_6_elements.iter().map(|el| el.to_string()).collect(),
+        );
+        // eprintln!("{:?}", ob);
+        assert_eq!(obj.get_size(), 12);
+        obj.add_one_new_element("16".to_string());
+        assert_eq!(obj.get_size(), 14);
+    }
+
+    #[test]
+    fn test_add_array_of_elements_to_merkle_tree() {
+        let arr_6_elements = ["1", "2", "3", "4"];
+        let mut obj = array_implementation::ArrayMT::new(
+            arr_6_elements.iter().map(|el| el.to_string()).collect(),
+        );
+        assert_eq!(obj.get_size(), 7);
+        let new_elements = ["5", "6", "7"];
+        obj.add_array_of_new_elements(new_elements.iter().map(|el| el.to_string()).collect());
+        assert_eq!(obj.get_size(), 14);
+        let new_elements = ["8"];
+        obj.add_array_of_new_elements(new_elements.iter().map(|el| el.to_string()).collect());
+        assert_eq!(obj.get_size(), 15);
     }
 }
