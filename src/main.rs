@@ -100,4 +100,18 @@ mod test_array_impl {
         obj.add_array_of_new_elements(new_elements.iter().map(|el| el.to_string()).collect());
         assert_eq!(obj.get_size(), 15);
     }
+
+    #[test]
+    fn test_generate_merkle_proof_and_verify() {
+        let arr_20_elements = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
+            "17", "18", "19", "20",
+        ];
+        let new_merkle_tree = array_implementation::ArrayMT::new(
+            arr_20_elements.iter().map(|el| el.to_string()).collect(),
+        );
+
+        let response = new_merkle_tree.prove_if_exists("3".to_string());
+        assert!(response);
+    }
 }
